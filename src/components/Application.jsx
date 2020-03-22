@@ -11,25 +11,15 @@ class Application extends Component {
     user: null
   };
 
-  firestoreUnsubscribe = null;
   authUnsubscribe = null;
 
   componentDidMount = async () => {
-    this.firestoreUnsubscribe = firestore.collection('posts').onSnapshot(s => {
-      const posts = s.docs.map(getDocsStuff);
-      this.setState({ posts });
-    });
-
     this.authUnsubscribe = auth.onAuthStateChanged(async u => {
       const user = await createUserProfileDoc(u);
 
       this.setState({ user });
     });
   };
-
-  componentWillUnmount() {
-    this.firestoreUnsubscribe();
-  }
 
   render() {
     const { posts, user } = this.state;
