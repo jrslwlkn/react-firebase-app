@@ -11,6 +11,8 @@ class AddComment extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    this.props.onCreate(this.state);
+
     this.setState({ content: '' });
   };
 
@@ -18,13 +20,7 @@ class AddComment extends Component {
     const { content } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className="AddComment">
-        <input
-          type="text"
-          name="content"
-          placeholder="Comment"
-          value={content}
-          onChange={this.handleChange}
-        />
+        <input type="text" name="content" placeholder="Comment" value={content} onChange={this.handleChange} />
         <input className="create" type="submit" value="Create Comment" />
       </form>
     );
