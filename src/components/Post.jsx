@@ -4,7 +4,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const Post = props => {
-  console.log(props);
   const { id, title, content, user, createdAt, stars, comments } = props;
   const { currentUser } = auth;
 
