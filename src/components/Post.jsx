@@ -26,7 +26,7 @@ const Post = ({ title, content, user, createdAt, stars, comments }) => {
           <p>Posted by {user.displayName}</p>
           <p>{moment(createdAt).calendar()}</p>
         </div>
-        <div>
+        <div className="Buttons">
           <button className="star">Star</button>
           <button className="delete">Delete</button>
         </div>
@@ -43,11 +43,11 @@ Post.defaultProps = {
     id: '123',
     displayName: 'Bill Murray',
     email: 'billmurray@mailinator.com',
-    photoURL: 'https://www.fillmurray.com/300/300',
+    photoURL: 'https://www.fillmurray.com/300/300'
   },
   createdAt: new Date(),
   stars: 0,
-  comments: 0,
+  comments: 0
 };
 
 export default Post;
