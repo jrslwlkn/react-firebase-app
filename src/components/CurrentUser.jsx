@@ -4,7 +4,7 @@ import moment from 'moment';
 import { signOut } from '../firebase';
 import { Link } from 'react-router-dom';
 
-const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
+const CurrentUser = ({ displayName, photoURL, email, createdAt, children }) => {
   return (
     <section className="UserProfile">
       <div className="UserProfile--profile">
@@ -14,7 +14,7 @@ const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
             <h2>{displayName}</h2>
           </Link>
           <p className="email">{email}</p>
-          <p className="created-at">{moment(createdAt.toDate()).calendar()}</p>
+          <p className="created-at">{moment(createdAt ? createdAt.toDate() : new Date()).calendar()}</p>
         </div>
       </div>
       <div>
@@ -25,4 +25,4 @@ const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
   );
 };
 
-export default UserProfile;
+export default CurrentUser;

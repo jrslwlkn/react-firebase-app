@@ -28,6 +28,7 @@ export default class UserProfile extends Component {
 
     if (displayName) {
       this.userRef.update({ displayName });
+      this.setState({ displayName: '' });
     }
   };
 

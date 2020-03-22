@@ -36,12 +36,11 @@ export const createUserProfileDoc = async (user, data) => {
   return getUserDoc(user.uid);
 }
 
-export const getUserDoc = async (uid) => {
+export const getUserDoc = async uid => {
   if (!uid) return null;
 
   try {
-    const userDoc = await firestore.collection('users').doc(uid).get();
-    return { uid, ...userDoc.data() }
+    return firestore.collection('users').doc(uid);
   } catch (err) {
     console.warn(err);
   }
