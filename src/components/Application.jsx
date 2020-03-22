@@ -23,17 +23,7 @@ class Application extends Component {
   }
 
   handleCreate = async post => {
-    const { posts } = this.state;
-    const docRef = await firestore.collection('posts').add(post);
-    const doc = await docRef.get();
-    const newPost = getDocsStuff(doc);
-    this.setState({ posts: [newPost, ...posts] });
-  };
-
-  handleRemove = async id => {
-    const posts = this.state.posts.filter(p => p.id !== id);
-    await firestore.doc(`posts/${id}`).delete();
-    this.setState({ posts });
+    await firestore.collection('posts').add(post);
   };
 
   render() {
