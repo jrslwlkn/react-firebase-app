@@ -6,6 +6,7 @@ import Comments from './Comments';
 import { getDocsStuff } from '../utils';
 import { firestore } from '../firebase';
 import { withRouter } from 'react-router-dom';
+import withUser from './withUser';
 
 class PostPage extends Component {
   state = {
@@ -46,7 +47,8 @@ class PostPage extends Component {
   }
 
   createComment = comment => {
-    this.commentsRef.add({ ...comment });
+    const { user } = this.props;
+    this.commentsRef.add({ ...comment, user });
   };
 
   render() {
@@ -64,4 +66,4 @@ class PostPage extends Component {
   }
 }
 
-export default withRouter(PostPage);
+export default withRouter(withUser(PostPage));
