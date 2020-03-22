@@ -23,7 +23,6 @@ class AddPost extends Component {
       comments: 0,
       createdAt: new Date()
     };
-    console.log(post);
 
     firestore.collection('posts').add(post);
     this.setState({ title: '', content: '' });
