@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { auth, createUserProfileDoc } from '../firebase';
 
 class SignUp extends Component {
   state = { displayName: '', email: '', password: '' };
@@ -9,8 +10,17 @@ class SignUp extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+    const { displayName, email, password } = this.state;
+
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
+      createUserProfileDoc(user, { displayName });
+    } catch (err) {
+      console.warn(err);
+    }
 
     this.setState({ displayName: '', email: '', password: '' });
   };
@@ -28,21 +38,9 @@ class SignUp extends Component {
           value={displayName}
           onChange={this.handleChange}
         />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Sign Up" />
+        <input type="email" name="email" placeholder="Email" value={email} onChange={this.handleChange} />
+        <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} />
+        <input type="submit" value="Sign Up" disabled={!displayName || !email || !password} />
       </form>
     );
   }

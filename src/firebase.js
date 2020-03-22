@@ -18,9 +18,39 @@ firebase.initializeApp(firebaseConfig);
 // will remove later
 window.firebase = firebase;
 
+export const createUserProfileDoc = async (user, data) => {
+  if (!user) return;
+
+  const userRef = firestore.doc(`users/${user.uid}`);
+  const snapshot = await userRef.get();
+  if (!snapshot.exists) {
+    const createdAt = new Date();
+    const {displayName, email, photoURL} = user;
+    try {
+      await userRef.set({displayName, email, photoURL, createdAt, ...data})
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+
+  return getUserDoc(user.uid);
+}
+
+export const getUserDoc = async (uid) => {
+  if (!uid) return null;
+
+  try {
+    const userDoc = await firestore.collection('users').doc(uid).get();
+    return { uid, ...userDoc.data() }
+  } catch (err) {
+    console.warn(err);
+  }
+}
+
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 export const provider = new firebase.auth.GoogleAuthProvider();
+
 export const googleSignIn = () => auth.signInWithPopup(provider).catch(console.warn);
 export const signOut = () => auth.signOut();
 

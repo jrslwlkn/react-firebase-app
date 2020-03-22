@@ -195,3 +195,8 @@ input[type='submit'],
 .Buttons {
   display: inline-flex;
 }
+
+input[type='submit']:disabled,
+button:disabled {
+  cursor: not-allowed;
+}

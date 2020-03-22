@@ -7,7 +7,7 @@ const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
   return (
     <section className="UserProfile">
       <div className="UserProfile--profile">
-        <img src={photoURL} alt={displayName} />
+        {photoURL && <img src={photoURL} alt={displayName} />}
         <div className="UserProfile--information">
           <h2>{displayName}</h2>
           <p className="email">{email}</p>
@@ -20,13 +20,6 @@ const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
       </div>
     </section>
   );
-};
-
-UserProfile.defaultProps = {
-  displayName: 'John Doe',
-  email: 'jdoe@mailinator.com',
-  photoURL: 'https://www.fillmurray.com/300/300',
-  createdAt: new Date()
 };
 
 export default UserProfile;
