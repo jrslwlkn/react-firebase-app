@@ -11,7 +11,7 @@ const UserProfile = ({ displayName, photoURL, email, createdAt, children }) => {
         <div className="UserProfile--information">
           <h2>{displayName}</h2>
           <p className="email">{email}</p>
-          <p className="created-at">{moment(createdAt).calendar()}</p>
+          <p className="created-at">{moment(createdAt.toDate()).calendar()}</p>
         </div>
       </div>
       <div>
