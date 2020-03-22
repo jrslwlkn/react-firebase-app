@@ -23,13 +23,19 @@ class Application extends Component {
     this.setState({ posts: [newPost, ...posts] });
   };
 
+  handleRemove = async id => {
+    const posts = this.state.posts.filter(p => p.id !== id);
+    await firestore.doc(`posts/${id}`).delete();
+    this.setState({ posts });
+  };
+
   render() {
     const { posts } = this.state;
 
     return (
       <main className="Application">
         <h1>Think Piece</h1>
-        <Posts posts={posts} onCreate={this.handleCreate} />
+        <Posts posts={posts} onCreate={this.handleCreate} onRemove={this.handleRemove} />
       </main>
     );
   }
