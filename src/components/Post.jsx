@@ -40,9 +40,11 @@ const Post = props => {
             <button className="star" onClick={star}>
               Star
             </button>
-            <button className="delete" onClick={remove}>
-              Delete
-            </button>
+            {currentUser.uid === user.uid && (
+              <button className="delete" onClick={remove}>
+                Delete
+              </button>
+            )}
           </div>
         )}
       </div>
