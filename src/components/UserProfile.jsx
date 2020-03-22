@@ -61,7 +61,7 @@ export default class UserProfile extends Component {
             onChange={this.handleChange}
           />
           <input type="file" ref={r => (this.image = r)} />
-          <input type="submit" className="update" />
+          <input type="submit" className="create" />
         </form>
       </section>
     );
