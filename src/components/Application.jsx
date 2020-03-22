@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { firestore, auth, createUserProfileDoc } from '../firebase';
+import { auth, createUserProfileDoc } from '../firebase';
 
 import Posts from './Posts';
-import { getDocsStuff } from '../utils';
 import Auth from './Auth';
 
 class Application extends Component {
   state = {
-    posts: [],
     user: null
   };
 
@@ -22,13 +20,13 @@ class Application extends Component {
   };
 
   render() {
-    const { posts, user } = this.state;
+    const { user } = this.state;
 
     return (
       <main className="Application">
         <h1>Think Piece</h1>
         <Auth user={user} />
-        <Posts posts={posts} onCreate={this.handleCreate} onRemove={this.handleRemove} />
+        <Posts />
       </main>
     );
   }
