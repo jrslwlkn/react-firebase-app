@@ -22,10 +22,6 @@ class Application extends Component {
     this.unsubscribe();
   }
 
-  handleCreate = async post => {
-    await firestore.collection('posts').add(post);
-  };
-
   render() {
     const { posts } = this.state;
 
