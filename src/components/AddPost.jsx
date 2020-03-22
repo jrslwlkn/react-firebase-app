@@ -19,7 +19,7 @@ class AddPost extends Component {
       title,
       content,
       user: { uid, displayName, email, photoURL },
-      favorites: 0,
+      stars: 0,
       comments: 0,
       createdAt: new Date()
     };
