@@ -5,14 +5,59 @@ import Comments from './Comments';
 
 import { getDocsStuff } from '../utils';
 import { firestore } from '../firebase';
+import { withRouter } from 'react-router-dom';
 
-export default class PostPage extends Component {
+class PostPage extends Component {
   state = {
     post: null,
     comments: []
   };
 
+  get postID() {
+    return this.props.match.params.id;
+  }
+
+  get postRef() {
+    return firestore.doc(`posts/${this.postID}`);
+  }
+
+  get commentsRef() {
+    return this.postRef.collection('comments');
+  }
+
+  postUnsubscribe = null;
+  commentsUnsubscribe = null;
+
+  componentDidMount = async () => {
+    this.postUnsubscribe = this.postRef.onSnapshot(snapshot => {
+      const post = getDocsStuff(snapshot);
+      this.setState({ post });
+    });
+
+    this.commentsUnsubscribe = this.commentsRef.onSnapshot(snapshot => {
+      const comments = snapshot.docs.map(getDocsStuff);
+      this.setState({ comments });
+    });
+  };
+
+  componentWillUnmount() {
+    this.postUnsubscribe();
+    this.commentsUnsubscribe();
+  }
+
   render() {
-    return <div>Post Page</div>;
+    const { post, comments } = this.state;
+    return (
+      <section>
+        {post && (
+          <>
+            <Post {...post} />
+            <Comments comments={comments} postID={post.id} onCreate={null} />
+          </>
+        )}
+      </section>
+    );
   }
 }
+
+export default withRouter(PostPage);
