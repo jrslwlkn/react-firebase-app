@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAW6A-d0RbqdqAFa-oRIrQ7m3GFhgzVxeU",
@@ -17,4 +18,5 @@ firebase.analytics();
 // will remove later
 window.firebase = firebase;
 
+export const firestore = firebase.firestore();
 export default firebase;
