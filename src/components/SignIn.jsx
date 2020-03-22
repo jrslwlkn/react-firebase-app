@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { googleSignIn } from '../firebase';
 
 class SignIn extends Component {
   state = { email: '', password: '' };
@@ -21,22 +22,10 @@ class SignIn extends Component {
     return (
       <form className="SignIn" onSubmit={this.handleSubmit}>
         <h2>Sign In</h2>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={this.handleChange}
-        />
+        <input type="email" name="email" placeholder="Email" value={email} onChange={this.handleChange} />
+        <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange} />
         <input type="submit" value="Sign In" />
-        <button>Sign In With Google</button>
+        <button onClick={googleSignIn}>Sign In With Google</button>
       </form>
     );
   }
